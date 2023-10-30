@@ -1,0 +1,16 @@
+{# App/Views/home.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article List</title>
+</head>
+<body>
+<h1>Articles </h1>
+<ul>
+    {% for article in articles %}
+
+        <li><a href="/articles-show/{{ loop.index }}">{{ article.getTitle() }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
