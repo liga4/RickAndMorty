@@ -7,6 +7,7 @@ use App\Response;
 
 class EpisodeController
 {
+
     private Api $api;
 
     public function __construct()
