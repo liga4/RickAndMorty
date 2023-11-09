@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Weather;
 use App\Response;
 use App\Router\Router;
+use App\WeatherApi;
+use Carbon\Carbon;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -10,9 +13,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $loader = new FilesystemLoader(__DIR__ . '/../app/Views');
 $twig = new Environment($loader);
-
+$weather = (new WeatherApi())->fetchData('london');
 $twig->addExtension(new DebugExtension());
-
+$twig->addGlobal('currentTime', Carbon::now());
+$twig->addGlobal('currentWeather', new Weather($weather->getTemperature(), $weather->getWindSpeed()));
 $currentDate = new DateTime();
 $routeInfo = Router::dispatch();
 switch ($routeInfo[0]) {
@@ -30,6 +34,5 @@ switch ($routeInfo[0]) {
 
         /** @var Response $response */
         echo $twig->render($response->getViewName() . '.twig', $response->getData());
-
         break;
 }

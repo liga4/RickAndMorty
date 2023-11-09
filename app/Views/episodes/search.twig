@@ -1,21 +1,14 @@
-<div class="navbar">
-    <form action="/" method="POST">
-        <input type="text" name="episode" id="episode" placeholder="Search episode (e.g. S01E01)">
-        <input type="submit" value="Episode">
-    </form>
-    {% if searchEpisode is not empty %}
-        <h2>Search Results:</h2>
-        <ul>
-            {% for episode in searchEpisode %}
-                <li>
-                    ID: {{ episode.id }}<br>
-                    Name: {{ episode.name }}<br>
-                    Episode: {{ episode.episode }}<br>
-                    Air Date: {{ episode.air_date }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Enter an episode.</p>
-    {% endif %}
-</div>
+{% include 'Partials/head.twig' %}
+{% include 'Partials/navbar.twig' %}
+{% include 'Partials/header.twig' %}
+
+<section>
+    <br>
+    {% for each in episode %}
+        <a href="/episode/{{ each.id }}">
+            <div>{{ each.name }}</div>
+        </a>
+    {% endfor %}
+</section>
+
+{% include 'Partials/footer.twig' %}

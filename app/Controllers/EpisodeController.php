@@ -54,4 +54,23 @@ class EpisodeController
             ]
         );
     }
+    public function search(): Response
+    {
+        $result = [];
+        $episode = $_GET['search'] ?? "";
+        $searchEpisode = $this->api->fetchEpisodes();
+
+        foreach ($searchEpisode as $value) {
+            if ($episode == $value->getEpisode()) {
+                $result[] = [
+                    'name' => $value->getName(),
+                    'id'=> $value->getId()
+                ];
+            }
+        }
+
+        return new Response('episodes/search', [
+            'episode' => $result
+        ]);
+    }
 }

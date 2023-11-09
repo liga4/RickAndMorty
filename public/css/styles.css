@@ -128,3 +128,7 @@ input {
 .character {
     width: 25%;
 }
+.weather {
+    font-size: 12px;
+    gap: .24rem
+}

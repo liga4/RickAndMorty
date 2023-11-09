@@ -6,3 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+<label class="weather">
+<h3>Time: {{ currentTime.format('Y-m-d H:i:s') }}</h3>
+<h3>Temperature: {{ currentWeather.temperature }} °C</h3>
+<h3>Wind: {{ currentWeather.windSpeed }} m/s</h3>
+</label>

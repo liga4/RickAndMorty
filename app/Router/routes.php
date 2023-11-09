@@ -6,6 +6,6 @@ return [
     ['GET', '/seasons', ['App\Controllers\SeasonController', 'index']],
     ['GET', '/season/{id}', ['App\Controllers\SeasonController', 'show']],
     ['GET', '/episode/{id}', ['App\Controllers\EpisodeController', 'show']],
-    ['POST', '/', ['App\Controllers\SearchController', 'index']]
+    ['GET', '/search', ['App\Controllers\EpisodeController', 'search']]
 
 ];
