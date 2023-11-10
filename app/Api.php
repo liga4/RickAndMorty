@@ -8,21 +8,24 @@ use GuzzleHttp\Client;
 
 class Api
 {
-    private Client $client;
+   // private Client $client;
     private const API_URL = 'https://rickandmortyapi.com/api/episode';
 
-    public function __construct()
-    {
-        $this->client = new Client(['verify' => 'C:\Windows\cacert.pem']);
-    }
+//    public function __construct()
+//    {
+//        $this->client = new Client(['verify' => 'C:\Windows\cacert.pem']);
+//    }
 
     public function fetchEpisodes(): array
     {
         $episodes = [];
         $page = 1;
         while (true) {
-            $response = $this->client->get(self::API_URL . "?page=$page");
-            $data = json_decode((string)$response->getBody());
+//            $response = $this->client->get(self::API_URL . "?page=$page");
+//            $data = json_decode((string)$response->getBody());
+
+            $response = file_get_contents(self::API_URL . "?page=$page");
+            $data = json_decode($response);
 
             foreach ($data->results as $result) {
                 $episodes[] = new Episode(
@@ -43,8 +46,10 @@ class Api
 
     public function fetchEpisode(int $id): Episode
     {
-        $response = $this->client->get(self::API_URL . "/{$id}");
-        $result = json_decode((string)$response->getBody());
+//        $response = $this->client->get(self::API_URL . "/{$id}");
+//        $result = json_decode((string)$response->getBody());
+        $response = file_get_contents(self::API_URL . "/{$id}");
+        $result = json_decode($response);
 
         return new Episode(
             $result->id,
@@ -92,8 +97,10 @@ class Api
 
     public function fetchEpisodeForSearch(string $searchedEpisode):array{
         $eps = [];
-        $response = $this->client->get(self::API_URL);
-        $result = json_decode((string)$response->getBody());
+//        $response = $this->client->get(self::API_URL);
+//        $result = json_decode((string)$response->getBody());
+        $response = file_get_contents(self::API_URL);
+        $result = json_decode($response);
         foreach ($result->results as $each){
         if ($each->episode == $searchedEpisode){
             $eps []= [
